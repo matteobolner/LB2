@@ -46,7 +46,6 @@ PROJECT WORKFLOW
 		-download sequences option from pdb -> copy all ids from list in dataset
 	
 	-Format the jpred dataset in the same way as the blind set representatives
-		$ blastclust -i bt_id_seqs.fasta -o clustered_seqs.fasta -L 0.30 -Sblastclust -i bt_id_seqs.fasta -o clustered_seqs.fasta -L 0.30 -S 30
 	
 	-Format as a blast DB the cluster representatives fasta
 		$ makeblastdb -in cluster_reps_seqs.fasta -dbtype prot	
@@ -61,15 +60,21 @@ PROJECT WORKFLOW
 	
 	-Run again the script build_fasta_from_pdb_id.py on the new list of ids
 		script: build_fasta_from_pdb_id.py
+
+	-Check that all the chains are of length between 30 and 500 residues
+		$ less bt_without_jpred_seqs.fasta | grep -v ">" | awk '{ print length($0) }'
 	
-	#####WE WILL DO THIS LATER-Randomly select 150 ids from the list obtained
-	#####	$ sort -R blind_set_without_jpred_ids.txt | head -n +150 > blind_set_final_ids.txt	#####	
+	-Randomly select 150 ids from the list obtained
+		$ sort -R blind_set_without_jpred_ids.txt | head -n +150 > blind_set_final_ids.txt		
 	
 	-Download the PDB files of all the IDS obtained
-	-Compare the fasta and pdb residue length, and keep all the ones with same length
+		script: download_pdb_from_ids.sh
 
-
-
+	-Run dssp on all the pdb files obtained
+		script: batch_dssp.sh
+	
+	-Obtain sequence and corresponding secondary structure prediction from each dssp file
+		$
 
 
 
