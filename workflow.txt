@@ -23,10 +23,22 @@ PROJECT WORKFLOW
 	
 	-Run PSI-BLAST on all the sequences in the training set against the database generated
 		$ psiblast -query $input_filename -db uniprot_sprot.fasta -evalue 0.01 -num_iterations 3 -out_ascii_pssm $input_filename_.pssm -out $input_filename_.alns.blast
+		script:	
 	
-	-Obtain the sequence profile from all the alignments
-
-
+	-At this point, some sequences give no .pssm result after psiblast since they have no hit (?) ; it is therefore necessary to remove them from the jpred list before using it as input for the SVM (???also need to remove the sequences with pssm completely full of 0s???)
+		$ ls | grep ".pssm" | sed 's/.pssm//' > pssm_list.txt
+		$ ls | grep ".fasta" > jpred_list.txt
+		$ comm jpred_list.txt ../pssm/pssm_list.txt -23 | sed 's/.fasta//' > psiblast_no_output_list.txt
+		$ comm jpred4.list.txt psiblast_output/fasta/ids_to_remove_from_jpred.txt -23 > jpred_list_without_psiblast_nohit.txt
+ 
+	
+	-Obtain the sequence profile from all the .pssm files
+		script: profile_from_pssm.sh
+	-Check the profiles obtained for empty profiles
+		$./sum_profile_values.sh ../dataset/psiblast_output/pssm/ | grep "^0 " | cut -d " " -f 2 > ../dataset/psiblast_output/empty_profiles.txt
+	-Remove the empty profiles
+		$ xargs rm  <../empty_profiles.txt
+		
 
 3)Generating the blind testing set:
 
@@ -73,13 +85,21 @@ PROJECT WORKFLOW
 	-Run dssp on all the pdb files obtained
 		script: batch_dssp.sh
 	
-	-Obtain sequence and corresponding secondary structure prediction from each dssp file
-		$
+	-!!!!OCIOOO!!! LA SEQUENZA DI RESIDUI NON PUOI TIRARLA FUORI DAL FILE DSSP CHE DA PROVLEMI COI PONTI DISOLFURO !! PRENDILA DAL FASTA E SE NON HA LA STESSA LUNGHEZZA DEL DSSP ELIMINALA!!!
+		Obtain sequence and corresponding secondary structure prediction from each dssp file
+		scripts: 1) extract_aa_ss_from_dssp.sh
+			 2) get_aa_ss_from_extracted.py
+	-FINAL OUTPUT: complete_bs.fasta
 
 
 
 
-
+SVM:::: DO IT BEFORE GOR SINCE IT TAKES A LNG TIME
+	-TAKE jpred
+	-remove ids not matching after psiblast (92 or 98 i dont remember)
+	-split the data in 5 sets
+	-run libsvm using 4 sets and 1 and repeat changing the 1 and the 4
+	
 
 
 #####command to sync folder:  rsync -aPr /home/pelmo/project/ lsbVM:/home/um69/project
