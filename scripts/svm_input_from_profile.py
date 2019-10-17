@@ -1,6 +1,4 @@
 
-#spudoratamente copiato da https://github.com/rpolve/lab2/blob/master/svmPrep.py
-
 import sys
 import os
 

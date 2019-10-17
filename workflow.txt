@@ -38,7 +38,10 @@ PROJECT WORKFLOW
 		$./sum_profile_values.sh ../dataset/psiblast_output/pssm/ | grep "^0 " | cut -d " " -f 2 > ../dataset/psiblast_output/empty_profiles.txt
 	-Remove the empty profiles
 		$ xargs rm  <../empty_profiles.txt
-		
+
+	-make the profiles svm-readable:
+		script: svm_input_from_profile.py		
+
 
 3)Generating the blind testing set:
 
@@ -75,7 +78,7 @@ PROJECT WORKFLOW
 
 	-Check that all the chains are of length between 30 and 500 residues
 		$ less bt_without_jpred_seqs.fasta | grep -v ">" | awk '{ print length($0) }'
-	
+
 	-Randomly select 150 ids from the list obtained
 		$ sort -R blind_set_without_jpred_ids.txt | head -n +150 > blind_set_final_ids.txt		
 	
@@ -92,6 +95,18 @@ PROJECT WORKFLOW
 	-FINAL OUTPUT: complete_bs.fasta
 
 
+
+4)SVM
+	-make the pssm profiles svm-readable:
+		script: svm_input_from_profile.py
+	
+	-split the files in 5 sets
+	
+	-build 5 training sets with 4/5 of the data and run 4 svm-train iterations per set with the following parameters:
+		-g : 0.5, 2
+		-c : 2, 4
+		
+		-doing: -g 0.5 -c 2	
 
 
 SVM:::: DO IT BEFORE GOR SINCE IT TAKES A LNG TIME
