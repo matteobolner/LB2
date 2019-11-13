@@ -1,4 +1,4 @@
-#this script takes as input a list of PDB IDs and a fasta file of PDB sequences, and outputs a fasta file of the input IDs associated with their sequence
+#this script takes as input a list of IDs and a fasta file of sequences, and outputs a fasta file of the input IDs associated with their sequence
 
 import sys
 

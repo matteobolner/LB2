@@ -8,4 +8,12 @@
 
 
 
-!!!!! DONT DIVIDE BY NUMBER OF RESIDUES BUT BY THE "COUNTING" OF FREQUENCES --> da capire 
+!!!!! DONT DIVIDE BY NUMBER OF RESIDUES BUT BY THE "COUNTING" OF FREQUENCES --> da capire
+
+
+
+
+
+PREDICTION:::
+you have the three trained windows (trained on 4/5ths of the dataset) and use the other 1/5th as testing set (input the profile of each sequence)
+p(SS|WINDOW) = sum of each element of (model_window * I(S|R) from input_profile_window)
