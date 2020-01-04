@@ -106,7 +106,6 @@ PROJECT WORKFLOW
 		-g : 0.5, 2
 		-c : 2, 4
 		
-		-doing: -g 0.5 -c 2	
 
 
 SVM:::: DO IT BEFORE GOR SINCE IT TAKES A LNG TIME

@@ -33,6 +33,7 @@ def fill_matrices(dssp_file,profile_file, H_matrix, E_matrix, C_matrix, TOT_matr
     for i in dssp_seq:
         c += 1
         window_matrix = padded_profile[c:(c+17)]
+        #print(window_matrix)
         if i == "H":
             H_matrix += window_matrix
             TOT_matrix += window_matrix
@@ -50,7 +51,6 @@ def fill_matrices(dssp_file,profile_file, H_matrix, E_matrix, C_matrix, TOT_matr
             TOT_matrix += window_matrix
             counting_matrix[2][1] += 1
             counting_matrix[3][1] += 1
-    
     return()
 
 
@@ -66,23 +66,17 @@ def train_model(output_folder):
         else:
             continue
     
-    H_matrix_sum = np.sum(H_matrix)
-    normalized_H_matrix = np.divide(H_matrix, counting_matrix[3][1]*100)
+
+    total_number = (counting_matrix[3][1]*100)
+    normalized_H_matrix = np.divide(H_matrix, total_number)
     
-    E_matrix_sum = np.sum(E_matrix)
-    normalized_E_matrix = np.divide(E_matrix, counting_matrix[3][1]*100)
+    normalized_E_matrix = np.divide(E_matrix, total_number)
     
-    C_matrix_sum = np.sum(C_matrix)
-    normalized_C_matrix = np.divide(C_matrix, counting_matrix[3][1]*100)
+    normalized_C_matrix = np.divide(C_matrix, total_number)
     
-    normalized_TOT_matrix = np.divide(TOT_matrix, counting_matrix[3][1]*100)
-    
+    normalized_TOT_matrix = np.divide(TOT_matrix, total_number)
     for l in range(3):
         counting_matrix[l][2] = np.divide(counting_matrix[l][1], counting_matrix[3][1])
-
-
-
-
 
     #*100 because the frequences must be in % and the profile contains the number not divided by 100
 
