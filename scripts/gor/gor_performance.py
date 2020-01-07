@@ -63,9 +63,9 @@ def binary_matrix(conf_dict):
     C_matrix[1][0] = U_C
     C_matrix[1][1] = N_C
     
-    SEN_H = (C_H)/(C_H + U_H)
-    PPV_H = (C_H)/(C_H + O_H)
-    MCC_H = (((C_H*N_H)-(O_H*U_H))/np.sqrt((C_H+O_H)*(C_H+U_H)*(N_H+O_H)*(N_H+U_H)))
+    SEN_H = (C_H)/(C_H + U_H)   #sensitivity/true positive rate
+    PPV_H = (C_H)/(C_H + O_H)   #precision/positive predictive value
+    MCC_H = (((C_H*N_H)-(O_H*U_H))/np.sqrt((C_H+O_H)*(C_H+U_H)*(N_H+O_H)*(N_H+U_H)))    #Matthew's correlation coefficient
 
     SEN_E = (C_E)/(C_E + U_E)
     PPV_E = (C_E)/(C_E + O_E)
@@ -97,6 +97,6 @@ def binary_matrix(conf_dict):
 
 
 if __name__ == "__main__":
-    prediction = sys.argv[1]
-    original = sys.argv[2]
+    original = sys.argv[1]
+    prediction = sys.argv[2]
     fill_matrix(prediction, original)
