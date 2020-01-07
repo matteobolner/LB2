@@ -1,0 +1,21 @@
+-prepare training data			V
+
+-prepare blind set with dssp files	V
+
+-statistics				X
+
+	-distribution of ss (H,E,C)	X
+
+	-aa composition of 
+		-whole dataset		X
+		-H,E,C conformations	X
+		-17 residue windows	X
+	-taxonomic classification	X
+	-structural classification(SCOP)X
+
+-implement GOR				X
+-implement SVM				V
+
+-measure performances			X
+
+-write manuscript			X

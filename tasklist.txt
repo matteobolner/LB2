@@ -1,3 +1,0 @@
--remove from pssm files the ones full of zeroes
--create input file for libsvm --> need "clean" jpred (remove pssm nohits and fullzeroes)
-
