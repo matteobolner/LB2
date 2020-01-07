@@ -13,7 +13,7 @@
 	-taxonomic classification	X
 	-structural classification(SCOP)X
 
--implement GOR				X
+-implement GOR				V
 -implement SVM				V
 
 -measure performances			X

@@ -58,8 +58,6 @@ def predict_from_set(model_folder):
         profile_name = line.rstrip() + ".profile"
         profile_path = os.path.join(profile_folder, profile_name)
         predict_ss(profile_path, inf_matrix_H, inf_matrix_E, inf_matrix_C, ss_count_matrix, aa_freq_matrix, counter_dict)
-        print("\n")
-        print(counter_dict)
 
     return(inf_matrix_H, inf_matrix_E, inf_matrix_C, counter_dict)
 

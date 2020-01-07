@@ -16,21 +16,22 @@ def get_fasta_from_id(id_file, sequences_file):
     k = create_id_list(id_file)    
     g = open(sequences_file)
     for line in g:
-        stripped_line = line.rstrip()
-        if stripped_line[0] == '>':
-            splitted_line = stripped_line.split('>')            
-        if splitted_line[1] in k:
-            c = 1
-            output_filename = (str(splitted_line[1]))
-            output_file = Path(output_folder + output_filename)
-            h = open(output_file, 'a')
-        else:
-            c = 0
-        if c == 1:
-            if line[0] == ">":
-                h.write(line)
+        if line != "":
+            stripped_line = line.rstrip()
+            if stripped_line[0] == '>':
+                splitted_line = stripped_line.split('>')            
+            if splitted_line[1] in k:
+                c = 1
+                output_filename = (str(splitted_line[1]))
+                output_file = Path(output_folder + output_filename)
+                h = open(output_file, 'a')
             else:
-                h.write(line.rstrip())
+                c = 0
+            if c == 1:
+                if line[0] == ">":
+                    h.write(line)
+                else:
+                    h.write(line.rstrip())
 
 if __name__ == "__main__":
     id_file = sys.argv[1]
