@@ -17,5 +17,7 @@
 -implement SVM				V
 
 -measure performances			X
+	-GOR
+	-SOV
 
 -write manuscript			X
