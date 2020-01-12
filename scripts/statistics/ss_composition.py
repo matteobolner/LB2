@@ -8,24 +8,32 @@ def ss_composition(ss_file):
     h_counter = 0
     e_counter = 0
     coil_counter = 0
+    total_counter = 0
     for line in f:
         for letter in line:
             if letter == "H":
                 h_counter += 1 
+                total_counter += 1
             elif letter == "E":
                 e_counter += 1
+                total_counter += 1
             elif letter == "-":
                 coil_counter += 1
+                total_counter += 1
+
     a = open("ss_total_count.txt", "w+")
-    a.write("H = " + str(h_counter) + "\n" + "E = " + str(e_counter) + "\n" + "- = " + str(coil_counter))
 
-    print(h_counter)
-    print(e_counter)
-    print(coil_counter)
+    h_percent = "{0:.2f}".format((h_counter/total_counter) * 100)
+    e_percent = "{0:.2f}".format((e_counter/total_counter) * 100)
+    c_percent = "{0:.2f}".format((coil_counter/total_counter) * 100)
 
-    df = pd.DataFrame([h_counter, e_counter, coil_counter], index = ['Helix' , 'Strand', 'Coil'], columns=[''])
-    df.plot(kind='pie', subplots=True, figsize=(8, 8))
-    plt.savefig('prova.png')
+
+    a.write("H=" + str(h_counter) + "=" + str(h_percent) + "%\n" + "E=" + str(e_counter) + "=" + str(e_percent) + "%\n" + "-=" + str(coil_counter) + "=" + str(c_percent) + "%\n" + "TOT=" + str(total_counter))
+
+
+    df = pd.DataFrame([h_counter, e_counter, coil_counter], index = ['Helix ' + h_percent + "%" , 'Strand ' + e_percent + "%" , 'Coil ' + c_percent + "%" ], columns=[''])
+    df.plot(kind='pie', subplots=True, figsize=(8, 8), legend = None)
+    plt.savefig('ss_composition.png')
     return()
 
 
