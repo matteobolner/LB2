@@ -1,6 +1,7 @@
 import sys
+import os
 import numpy as np
-import pickle
+
 
 def extract_segments(sequence, ss):
     sequence = sequence.rstrip()
@@ -45,14 +46,15 @@ def sov_score(original_segments, predicted_segments):
         sov = sum(summatory) * (1/normalization) * 100
         
     elif normalization == 0:
-        sov = 0
+        sov = 100
 
     return(sov)
 
 
-def get_sov(original_file, predicted_file, pickle_output):
+def get_sov(original_file, predicted_file):
+    seq_counter = 0
     ss_list = ["H", "E", "-"]
-    ss_dict = dict([ss, np.zeros(4)] for ss in ss_list)
+    ss_dict = dict([ss, np.zeros(2)] for ss in ss_list)
     
     with open(original_file, "r") as open_orig:
         orig_lines = open_orig.readlines()
@@ -68,23 +70,20 @@ def get_sov(original_file, predicted_file, pickle_output):
 
             orig_segments = extract_segments(original_seq, ss)
             pred_segments = extract_segments(predicted_seq, ss)
-            if original_seq.count(ss) != 0:
-                ss_dict[ss][0] += sov_score(orig_segments, pred_segments)
-                ss_dict[ss][1] += 1
-            else:
-                ss_dict[ss][3] += 1
+            ss_dict[ss][0] += sov_score(orig_segments, pred_segments)
+            seq_counter += 1
             
 
-
+    seq_counter = seq_counter / 3
     for ss in ss_dict.values():
-        ss[2] = ss[0]/ss[1]
+        ss[1] = ss[0]/int(seq_counter)
     
-    with open(pickle_output , 'wb') as pickled:
-        pickle.dump(ss_dict, pickled)
+    print("Number of sequences:\t" + str(int((seq_counter))))
+    for ss in ss_list:
+        print(ss + ":\t" + str(ss_dict[ss][1]))
     return(ss_dict)
 
 if __name__ == "__main__":
     original_file = sys.argv[1]
     predicted_file = sys.argv[2]
-    pickle_output = sys.argv[3]
-    get_sov(original_file,predicted_file, pickle_output)
+    get_sov(original_file,predicted_file)
