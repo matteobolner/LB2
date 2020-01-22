@@ -52,7 +52,7 @@ PROJECT WORKFLOW
 		$ less blind_set_reference.csv | cut -d "," -f 1,2,5 | sed 's/"//g' | sed 's/,/_/' | sed 's/^/>/' | sed 's/,/\n/'> bt_id_chain_seq.fasta
 
 	-Cluster the chains using blastclust, in order to reduce similarity between the sequences in the blind testing set
-		$ blastclust -i bt_id_seqs.fasta -o clustered_seqs.fasta -L 0.30 -Sblastclust -i bt_id_seqs.fasta -o clustered_seqs.fasta -L 0.30 -S 30 30
+		$ blastclust -i bt_id_seqs.fasta -o clustered_seqs.fasta -L 0.30 -S 30
 	
 	-Obtain a file containing ID and sequence of the cluster representatives (first element in each cluster)
 		script: build_fasta_from_pdb_id.py

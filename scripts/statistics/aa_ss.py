@@ -79,10 +79,10 @@ def count_aa_ss(merged_file):
 
 
     #call the functions for the various plots
-    #ss_piechart(counter_dict)
+    ss_piechart(counter_dict)
     barplot_aa_ss(counter_dict, freq_dict)
-    #barplot_aa(counter_dict, freq_dict)
-    #heatmap(H_dict,E_dict)
+    barplot_aa(counter_dict, freq_dict)
+    heatmap(H_dict,E_dict)
     
     return(counter_dict)    
 
