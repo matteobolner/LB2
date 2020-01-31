@@ -14,7 +14,7 @@ Matherials and methods
 	-blind set
 		-filters applied on pdb, to reduce redundancy ,
 		-how you generated 2ndary struc (dssp, descrive method)
-		-describe in details GOR method (dont describe your implementation, describe mathematically(information content)
+-describe in details GOR method (dont describe your implementation, describe mathematically(information content)
 			-in other section you can talk about the implementation methods
 			-describe scoring indexes and why SOV is important, why second level(???) indexes are not significant
 

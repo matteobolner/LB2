@@ -18,11 +18,12 @@ def get_fasta_from_id(id_file, sequences_file):
     for line in g:
         if line != "":
             stripped_line = line.rstrip()
+            print(stripped_line[0])
             if stripped_line[0] == '>':
                 splitted_line = stripped_line.split('>')            
             if splitted_line[1] in k:
                 c = 1
-                output_filename = (str(splitted_line[1]))
+                output_filename = (str(splitted_line[1])+".dssp")
                 output_file = Path(output_folder + output_filename)
                 h = open(output_file, 'a')
             else:
