@@ -27,5 +27,5 @@ if __name__ == "__main__":
     pred_file = sys.argv[1]
     original = sys.argv[2]
     dssp_pred_file = sys.argv[3]
-    dssp_from_pred(pred_file, original, dssp_pred_file,)
+    dssp_from_pred(pred_file, original, dssp_pred_file)
 

@@ -7,9 +7,10 @@ def create_id_list(id_file):
     f = open(id_file)
     id_list = []
     for line in f:
-        pdb_id = line.rstrip()
+        pdb_id = line.rstrip().split("_")[0]
+        chain = line.rstrip().split("_")[1]
         if pdb_id != ['']:              #avoid appending empty elements to the ID list
-            id_list.append(pdb_id)
+            id_list.append(pdb_id+"_"+chain)
     return(id_list)
 
 def get_fasta_from_id(id_file, sequences_file):
@@ -18,12 +19,12 @@ def get_fasta_from_id(id_file, sequences_file):
     for line in g:
         if line != "":
             stripped_line = line.rstrip()
-            print(stripped_line[0])
+            #print(stripped_line[0])
             if stripped_line[0] == '>':
                 splitted_line = stripped_line.split('>')            
             if splitted_line[1] in k:
                 c = 1
-                output_filename = (str(splitted_line[1])+".dssp")
+                output_filename = (str(splitted_line[1].upper())+".fasta")
                 output_file = Path(output_folder + output_filename)
                 h = open(output_file, 'a')
             else:
