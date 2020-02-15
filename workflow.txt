@@ -88,8 +88,7 @@ PROJECT WORKFLOW
 	-Run dssp on all the pdb files obtained
 		script: batch_dssp.sh
 	
-	-!!!!OCIOOO!!! LA SEQUENZA DI RESIDUI NON PUOI TIRARLA FUORI DAL FILE DSSP CHE DA PROVLEMI COI PONTI DISOLFURO !! PRENDILA DAL FASTA E SE NON HA LA STESSA LUNGHEZZA DEL DSSP ELIMINALA!!!
-		Obtain sequence and corresponding secondary structure prediction from each dssp file
+	-Obtain sequence and corresponding secondary structure prediction from each dssp file
 		scripts: 1) extract_aa_ss_from_dssp.sh
 			 2) get_aa_ss_from_extracted.py
 	-FINAL OUTPUT: complete_bs.fasta

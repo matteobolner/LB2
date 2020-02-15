@@ -18,7 +18,7 @@ species_dict = {"H.sapiens":216, "E.coli":128, "T.thermophilus":38, "S.cerevisia
 labels = list(species_dict.keys())
 sizes = list(species_dict.values())
 fig1, ax1 = plt.subplots()
-ax1.pie(sizes, labels = labels, autopct='%1.0f%%')
+ax1.pie(sizes, labels = labels, autopct='%1.0f%%', rotatelabels = True)
 plt.tight_layout()
 plt.savefig("species_piechart.png")
 plt.clf()

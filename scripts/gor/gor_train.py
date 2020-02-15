@@ -109,7 +109,7 @@ def train_model(output_folder):
 
 
 if __name__ == "__main__":
-    profile_folder = sys.argv[1]
-    id_list = sys.argv[2]
+    id_list = sys.argv[1]
+    profile_folder = sys.argv[2]
     output_folder = sys.argv[3]
     train_model(output_folder)

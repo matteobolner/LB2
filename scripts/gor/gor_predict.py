@@ -57,7 +57,8 @@ def predict_from_set(model_folder):
         print(">" + line.rstrip())
         profile_name = line.rstrip() + ".profile"
         profile_path = os.path.join(profile_folder, profile_name)
-        predict_ss(profile_path, inf_matrix_H, inf_matrix_E, inf_matrix_C, ss_count_matrix, aa_freq_matrix, counter_dict)
+        if os.path.isfile(profile_path):
+            predict_ss(profile_path, inf_matrix_H, inf_matrix_E, inf_matrix_C, ss_count_matrix, aa_freq_matrix, counter_dict)
 
     return(inf_matrix_H, inf_matrix_E, inf_matrix_C, counter_dict)
 
@@ -96,8 +97,8 @@ def predict_ss(profile_file, inf_matrix_H, inf_matrix_E, inf_matrix_C, ss_count_
 
 
 if __name__ == "__main__":
-    model_folder = sys.argv[1]
-    id_list = sys.argv[2]
+    id_list = sys.argv[1]
+    model_folder = sys.argv[2]
     profile_folder = sys.argv[3]
     predict_from_set(model_folder)
     

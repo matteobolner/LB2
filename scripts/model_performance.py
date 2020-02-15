@@ -7,8 +7,8 @@ def fill_matrix(prediction, original):
     conf_dict = {"HH":0, "HE":0, "H-":0, "EH":0, "EE":0, "E-":0, "-H":0, "-E":0, "--":0, "TOT":0}       #"originalpredicted":0
     prediction = open(prediction, "r")
     original = open(original, "r")
-    pred_filelist = prediction.readlines()  
-    orig_filelist = original.readlines()  
+    pred_filelist = [pred_line.rstrip() for pred_line in prediction]
+    orig_filelist = [orig_line.rstrip() for orig_line in original]
     line_counter = -1
     for line in orig_filelist:
         line_counter += 1
@@ -77,22 +77,19 @@ def binary_matrix(conf_dict):
 
     TCA = ((C_H + C_E + C_C)/conf_dict["TOT"])     #three class accuracy
     
-    print("#Counter dictionary (Original data|Prediction)\n")
+    print("#Counter dictionary (Original data|Prediction);")
     print(conf_dict)
-    print("\n#H confusion matrix \n" )
+    print("\n#H confusion matrix ;" )
     print(H_matrix)
-    print("\n#E confusion matrix \n")
+    print("\n#E confusion matrix ;")
     print(E_matrix)
-    print("\n#C confusion matrix \n")
+    print("\n#C confusion matrix ;")
     print(C_matrix)
-    print("\n#H,E,C: \n#SEN:")
-    print(SEN_H, SEN_E, SEN_C)
-    print("\n#PPV:")
-    print(PPV_H, PPV_E, PPV_C)
-    print("\n#MCC:")
-    print(MCC_H, MCC_E, MCC_C)
-    print("\n#TCA:")
-    print(TCA)
+    print("\n#H,E,C: \n")
+    print("\n#SEN;"+ str(SEN_H) +";"+ str(SEN_E) + ";" + str(SEN_C))
+    print("\n#PPV;"+ str(PPV_H) +";"+ str(PPV_E) + ";" + str(PPV_C))
+    print("\n#MCC;"+ str(MCC_H) +";"+ str(MCC_E) + ";" + str(MCC_C))
+    print("\n#TCA;"+str(TCA))
     return()
 
 
