@@ -18,7 +18,7 @@ def dssp_from_pred(pred_file, original, dssp_pred_file):
         overallposcounter += len(clean_line)
         temp_list = "".join(temp_list)
         dssp_pred_file.write(temp_list + "\n")
-        
+        #print(temp_list)
     return()
 
 

@@ -63,19 +63,17 @@ def binary_matrix(conf_dict):
     C_matrix[1][0] = U_C
     C_matrix[1][1] = N_C
     
-    SEN_H = (C_H)/(C_H + U_H)   #sensitivity/true positive rate
-    PPV_H = (C_H)/(C_H + O_H)   #precision/positive predictive value
-    MCC_H = (((C_H*N_H)-(O_H*U_H))/np.sqrt((C_H+O_H)*(C_H+U_H)*(N_H+O_H)*(N_H+U_H)))    #Matthew's correlation coefficient
+    SEN_H = round((C_H)/(C_H + U_H), 2)   #sensitivity/true positive rate
+    PPV_H = round((C_H)/(C_H + O_H), 2)   #precision/positive predictive value
+    MCC_H = round((((C_H*N_H)-(O_H*U_H))/np.sqrt((C_H+O_H)*(C_H+U_H)*(N_H+O_H)*(N_H+U_H))), 2)    #Matthew's correlation coefficient
 
-    SEN_E = (C_E)/(C_E + U_E)
-    PPV_E = (C_E)/(C_E + O_E)
-    MCC_E = (((C_E*N_E)-(O_E*U_E))/np.sqrt((C_E+O_E)*(C_E+U_E)*(N_E+O_E)*(N_E+U_E)))
-
-    SEN_C = (C_C)/(C_C + U_C)
-    PPV_C = (C_C)/(C_C + O_C)
-    MCC_C = (((C_C*N_C)-(O_C*U_C))/np.sqrt((C_C+O_C)*(C_C+U_C)*(N_C+O_C)*(N_C+U_C)))
-
-    TCA = ((C_H + C_E + C_C)/conf_dict["TOT"])     #three class accuracy
+    SEN_E = round((C_E)/(C_E + U_E), 2)
+    PPV_E = round((C_E)/(C_E + O_E), 2)
+    MCC_E = round((((C_E*N_E)-(O_E*U_E))/np.sqrt((C_E+O_E)*(C_E+U_E)*(N_E+O_E)*(N_E+U_E))), 2)
+    SEN_C = round((C_C)/(C_C + U_C), 2)
+    PPV_C = round((C_C)/(C_C + O_C), 2)
+    MCC_C = round((((C_C*N_C)-(O_C*U_C))/np.sqrt((C_C+O_C)*(C_C+U_C)*(N_C+O_C)*(N_C+U_C))), 2)
+    TCA = round((((C_H , 2)+ C_E + C_C)/conf_dict["TOT"]),2)    #three class accuracy
     
     print("#Counter dictionary (Original data|Prediction);")
     print(conf_dict)
