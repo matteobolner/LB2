@@ -35,9 +35,6 @@ References
 
 
 
-UNDER 7 PAGES
-
-
 also put all the scripts used on a repository and give him the link
 
 	Supplementary materials:

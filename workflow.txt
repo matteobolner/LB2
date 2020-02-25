@@ -115,7 +115,6 @@ SVM:::: DO IT BEFORE GOR SINCE IT TAKES A LNG TIME
 	
 
 
-#####command to sync folder:  rsync -aPr /home/pelmo/project/ lsbVM:/home/um69/project
 
 
 

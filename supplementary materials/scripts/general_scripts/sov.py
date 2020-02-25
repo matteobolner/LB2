@@ -1,7 +1,8 @@
 import sys
 import os
 import numpy as np
-
+from scipy import stats
+import statistics
 
 def extract_segments(sequence, ss):
     sequence = sequence.rstrip()
@@ -55,7 +56,7 @@ def get_sov(original_file, predicted_file):
     seq_counter = 0
     ss_list = ["H", "E", "-"]
     ss_dict = dict([ss, np.zeros(2)] for ss in ss_list)
-    
+    sov_dict = {'H': [], 'E':[], '-':[]}
     with open(original_file, "r") as open_orig:
         orig_lines = open_orig.readlines()
         
@@ -70,18 +71,21 @@ def get_sov(original_file, predicted_file):
 
             orig_segments = extract_segments(original_seq, ss)
             pred_segments = extract_segments(predicted_seq, ss)
-            ss_dict[ss][0] += sov_score(orig_segments, pred_segments)
-            seq_counter += 1
-            
+            sov_dict[ss].append(sov_score(orig_segments, pred_segments))
+            #ss_dict[ss][0] += sov_score(orig_segments, pred_segments)
+            #seq_counter += 1
 
-    seq_counter = seq_counter / 3
-    for ss in ss_dict.values():
-        ss[1] = ss[0]/int(seq_counter)
+    #seq_counter = seq_counter / 3
+    #for ss in ss_dict.values():
+    #    ss[1] = ss[0]/int(seq_counter)
     
-    print("Number of sequences:\t" + str(int((seq_counter))))
-    for ss in ss_list:
-        print(ss + ":\t" + str(ss_dict[ss][1]))
-    return(ss_dict)
+    #print("Number of sequences:\t" + str(int((seq_counter))))
+    #for ss in ss_list:
+    #    print(ss + ":\t" + str(ss_dict[ss][1]))
+    print('SOV\tAVG\t\tSTDERR')
+    for i in sov_dict.items():
+        print(i[0], statistics.mean(i[1]), stats.sem(i[1], ddof = 0))
+    return()
 
 if __name__ == "__main__":
     original_file = sys.argv[1]

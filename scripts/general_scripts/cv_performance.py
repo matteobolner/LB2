@@ -47,8 +47,7 @@ def get_files(perf_folder, perf_filetype, sov_filetype):
     perf_mean_and_sem = perf_mean_and_sem.multiply(100).round(2)
     perf_cols = (' '.join(w) for w in zip(perf_mean_and_sem.columns[::2], perf_mean_and_sem.columns[1::2]))
     perf_mean_and_sem = pd.DataFrame(perf_mean_and_sem.iloc[:, ::2].astype(str).values + ' ± ' + perf_mean_and_sem.iloc[:, 1::2].astype(str).values, index=perf_mean_and_sem.index, columns=perf_cols)
-    
-sov_mean_and_sem = sov_mean_and_sem.transpose().round(2)
+    sov_mean_and_sem = sov_mean_and_sem.transpose().round(2)
     sov_cols = (' '.join(k) for k in zip(sov_mean_and_sem.columns[::2], sov_mean_and_sem.columns[1::2]))
     sov_mean_and_sem = pd.DataFrame(sov_mean_and_sem.iloc[:, ::2].astype(str).values + ' ± ' + sov_mean_and_sem.iloc[:, 1::2].astype(str).values, index =['H','E','C'], columns = ['SOV'])
     perf_mean_and_sem = pd.DataFrame(perf_mean_and_sem.transpose())
